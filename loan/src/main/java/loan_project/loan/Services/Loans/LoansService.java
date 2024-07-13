@@ -91,6 +91,10 @@ public class LoansService {
 
             loan.setLoansWitnessesList(loansWitnessesList);
         }
+        else {
+
+            loan.setLoansWitnessesList(null);
+        }
 
         if (mediaProof != null && !mediaProof.isEmpty()) {
 
