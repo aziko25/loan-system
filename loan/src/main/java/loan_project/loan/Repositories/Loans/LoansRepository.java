@@ -38,7 +38,7 @@ public interface LoansRepository extends JpaRepository<Loans, Long> {
             @Param("onlyBorrowing") Boolean onlyBorrowing,
             @Param("onlyWitnessing") Boolean onlyWitnessing,
             @Param("witnessLoanIds") List<Long> witnessLoanIds,
-            @Param("onlyCameInForce") Boolean onlyCameIntoForce,
+            @Param("onlyCameIntoForce") Boolean onlyCameIntoForce,
             @Param("onlyBorrowerReturnedLoan") Boolean onlyBorrowerReturnedLoan,
             Pageable pageable);
 }
