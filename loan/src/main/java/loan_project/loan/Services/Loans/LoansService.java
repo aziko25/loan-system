@@ -263,11 +263,9 @@ public class LoansService {
         Optional.ofNullable(loansRequest.getSum()).ifPresent(loan::setSum);
         Optional.ofNullable(loansRequest.getIsBorrowerReturnedLoan()).ifPresent(loan::setIsBorrowerReturnedLoan);
 
-        loansRepository.save(loan);
-
         if (loan.getIsCameIntoForce()) {
 
-            throw new IllegalArgumentException("The Loan Is Already In Force, You Can Update Only Deadline, Sum And Loan Status");
+            throw new IllegalArgumentException("The Loan Is Already In Force");
         }
 
         if (loansRequest.getBorrowerId() != null) {
