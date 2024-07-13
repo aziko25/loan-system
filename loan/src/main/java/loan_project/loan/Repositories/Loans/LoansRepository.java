@@ -27,7 +27,9 @@ public interface LoansRepository extends JpaRepository<Loans, Long> {
             "AND (COALESCE(:endDate, l.createdTime) = l.createdTime OR l.createdTime <= :endDate) " +
             "AND (COALESCE(:onlyLoaning, false) = false OR l.loaner = :user) " +
             "AND (COALESCE(:onlyBorrowing, false) = false OR l.borrower = :user) " +
-            "AND (COALESCE(:onlyWitnessing, false) = false OR l.id IN :witnessLoanIds)")
+            "AND (COALESCE(:onlyWitnessing, false) = false OR l.id IN :witnessLoanIds) " +
+            "AND (COALESCE(:onlyCameIntoForce, false) = false OR l.isCameIntoForce = true) " +
+            "AND (COALESCE(:onlyBorrowerReturnedLoan, false) = false OR l.isBorrowerReturnedLoan = true)")
     Page<Loans> findAllByFilters(
             @Param("user") Users user,
             @Param("startDate") LocalDateTime startDate,
@@ -36,5 +38,7 @@ public interface LoansRepository extends JpaRepository<Loans, Long> {
             @Param("onlyBorrowing") Boolean onlyBorrowing,
             @Param("onlyWitnessing") Boolean onlyWitnessing,
             @Param("witnessLoanIds") List<Long> witnessLoanIds,
+            @Param("onlyCameInForce") Boolean onlyCameIntoForce,
+            @Param("onlyBorrowerReturnedLoan") Boolean onlyBorrowerReturnedLoan,
             Pageable pageable);
 }

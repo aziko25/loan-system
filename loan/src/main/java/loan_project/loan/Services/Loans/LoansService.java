@@ -116,6 +116,9 @@ public class LoansService {
             Boolean onlyLoaning = filters.getOnlyLoaning() != null ? filters.getOnlyLoaning() : false;
             Boolean onlyBorrowing = filters.getOnlyBorrowing() != null ? filters.getOnlyBorrowing() : false;
 
+            Boolean onlyCameIntoForce = filters.getOnlyCameIntoForce() != null ? filters.getOnlyCameIntoForce() : false;
+            Boolean onlyBorrowerReturnedLoan = filters.getOnlyBorrowerReturnedLoan() != null ? filters.getOnlyBorrowerReturnedLoan() : false;
+
             if (onlyWitnessing) {
                 List<Loans_Witnesses> loansWitnessesList = loansWitnessesRepository.findAllByWitnessId(user);
                 witnessLoanIds = loansWitnessesList.stream()
@@ -131,6 +134,8 @@ public class LoansService {
                     onlyBorrowing,
                     onlyWitnessing,
                     witnessLoanIds,
+                    onlyCameIntoForce,
+                    onlyBorrowerReturnedLoan,
                     pageable
             );
 

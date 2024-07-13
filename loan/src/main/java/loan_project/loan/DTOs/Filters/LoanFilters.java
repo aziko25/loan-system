@@ -15,4 +15,7 @@ public class LoanFilters {
     private Boolean onlyLoaning;
     private Boolean onlyBorrowing;
     private Boolean onlyWitnessing;
+
+    private Boolean onlyCameIntoForce;
+    private Boolean onlyBorrowerReturnedLoan;
 }
