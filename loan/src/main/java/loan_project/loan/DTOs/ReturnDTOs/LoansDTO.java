@@ -73,20 +73,24 @@ public class LoansDTO {
         isCameIntoForce = loan.getIsCameIntoForce();
         isBorrowerReturnedLoan = loan.getIsBorrowerReturnedLoan();
 
-        Set<Loans_Witnesses> witnesses = new HashSet<>(loan.getLoansWitnessesList());
-        witnessesList = witnesses.stream()
-                .map(witness -> {
+        witnessesList = new ArrayList<>();
+        if (loan.getLoansWitnessesList() != null && !loan.getLoansWitnessesList().isEmpty()) {
 
-                    Map<String, Object> map = new LinkedHashMap<>();
+            Set<Loans_Witnesses> witnesses = new HashSet<>(loan.getLoansWitnessesList());
+            witnessesList = witnesses.stream()
+                    .map(witness -> {
 
-                    map.put("witnessId", witness.getWitnessId().getId());
-                    map.put("witnessPassport", witness.getWitnessId().getPassport());
-                    map.put("witnessPinfl", witness.getWitnessId().getPinfl());
-                    map.put("witnessPhone", witness.getWitnessId().getPhone());
-                    map.put("witnessFullName", witness.getWitnessId().getFullName());
-                    map.put("isApproved", witness.getIsApproved());
+                        Map<String, Object> map = new LinkedHashMap<>();
 
-                    return map;
-                }).collect(Collectors.toList());
+                        map.put("witnessId", witness.getWitnessId().getId());
+                        map.put("witnessPassport", witness.getWitnessId().getPassport());
+                        map.put("witnessPinfl", witness.getWitnessId().getPinfl());
+                        map.put("witnessPhone", witness.getWitnessId().getPhone());
+                        map.put("witnessFullName", witness.getWitnessId().getFullName());
+                        map.put("isApproved", witness.getIsApproved());
+
+                        return map;
+                    }).collect(Collectors.toList());
+        }
     }
 }
