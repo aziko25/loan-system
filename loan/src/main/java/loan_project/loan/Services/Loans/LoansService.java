@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import static loan_project.loan.Configurations.JWT.AuthorizationMethods.USER_ID;
@@ -149,6 +150,39 @@ public class LoansService {
                 .collect(Collectors.toList());
 
         return loansRepository.findAllByLoanerOrBorrowerOrIdIn(user, user, loansIds, pageable).map(LoansDTO::new);
+    }
+
+    public LoansDTO getByID(Long id) {
+
+        Users user = usersRepository.findById(USER_ID).orElseThrow(() -> new EntityNotFoundException("User Not Found"));
+
+        Loans loan = loansRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Loan Not Found"));
+
+        if (!loan.getBorrower().equals(user) && !loan.getLoaner().equals(user)) {
+
+            if (loan.getLoansWitnessesList() == null || loan.getLoansWitnessesList().isEmpty()) {
+
+                throw new IllegalArgumentException("You Are Not Participating In This Loan Act!");
+            }
+            else {
+
+                AtomicBoolean isWitness = new AtomicBoolean(false);
+                loan.getLoansWitnessesList().forEach(witness -> {
+
+                    if (witness.getWitnessId().equals(user)) {
+
+                        isWitness.set(true);
+                    }
+                });
+
+                if (!isWitness.get()) {
+
+                    throw new IllegalArgumentException("You Are Not Participating In This Loan Act!");
+                }
+            }
+        }
+
+        return new LoansDTO(loan);
     }
 
     public LoansDTO approveLoanAsBorrower(Long loanId, Boolean approve) {

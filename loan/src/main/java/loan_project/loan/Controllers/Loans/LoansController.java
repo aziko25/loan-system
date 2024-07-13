@@ -42,6 +42,13 @@ public class LoansController {
     }
 
     @Authorization(requiredRoles = {"ADMIN", "USER"})
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+
+        return ResponseEntity.ok(loansService.getByID(id));
+    }
+
+    @Authorization(requiredRoles = {"ADMIN", "USER"})
     @PutMapping("/approveAsBorrower/{id}")
     public ResponseEntity<?> approveAsBorrower(@PathVariable Long id, @RequestParam Boolean isApproved) {
 
