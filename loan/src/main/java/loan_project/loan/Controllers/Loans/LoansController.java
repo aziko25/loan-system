@@ -62,7 +62,7 @@ public class LoansController {
         return ResponseEntity.ok(loansService.approveLoanAsWitness(id, isApproved));
     }
 
-    @Authorization(requiredRoles = {"ADMIN", "USER"})
+    /*@Authorization(requiredRoles = {"ADMIN", "USER"})
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestParam(value = "media", required = false) MultipartFile media,
@@ -74,7 +74,7 @@ public class LoansController {
         LoansRequest loansRequest = objectMapper.readValue(loanJson, LoansRequest.class);
 
         return ResponseEntity.ok(loansService.update(id, media, loansRequest));
-    }
+    }*/
 
     @Authorization(requiredRoles = {"ADMIN", "USER"})
     @DeleteMapping("/delete/{id}")

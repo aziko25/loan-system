@@ -34,6 +34,8 @@ public class Loans {
     @JoinColumn(name = "borrower_id")
     private Users borrower;
 
+    private String text;
+
     private Double sum;
 
     @JsonFormat(shape = STRING, pattern = "dd-MM-yyyy HH:mm:ss")

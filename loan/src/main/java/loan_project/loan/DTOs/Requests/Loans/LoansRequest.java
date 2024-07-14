@@ -11,6 +11,7 @@ import java.util.List;
 public class LoansRequest {
 
     private Long borrowerId;
+    private String text;
     private Double sum;
     private LocalDateTime deadline;
     private Boolean isBorrowerReturnedLoan;

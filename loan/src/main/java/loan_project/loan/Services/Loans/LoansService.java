@@ -60,6 +60,7 @@ public class LoansService {
                 .createdTime(LocalDateTime.now())
                 .loaner(loaner)
                 .borrower(borrower)
+                .text(loansRequest.getText())
                 .sum(loansRequest.getSum())
                 .deadline(loansRequest.getDeadline())
                 .isBorrowerApproved(false)
@@ -280,7 +281,7 @@ public class LoansService {
         return new LoansDTO(loansRepository.save(loan));
     }
 
-    @Transactional
+    /*@Transactional
     public LoansDTO update(Long loanId, MultipartFile mediaProof, LoansRequest loansRequest) {
 
         Users loaner = usersRepository.findById(USER_ID).orElseThrow(() -> new EntityNotFoundException("User Not Found"));
@@ -362,7 +363,7 @@ public class LoansService {
         }
 
         return new LoansDTO(loansRepository.save(loan));
-    }
+    }*/
 
     public String delete(Long loanId) {
 

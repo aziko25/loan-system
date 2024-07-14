@@ -35,6 +35,7 @@ public class LoansDTO {
     private String borrowerPhone;
     private String borrowerFullName;
 
+    private String text;
     private Double sum;
 
     @JsonFormat(shape = STRING, pattern = "dd-MM-yyyy HH:mm:ss")
@@ -65,6 +66,7 @@ public class LoansDTO {
         borrowerPhone = loan.getBorrower().getPhone();
         borrowerFullName = loan.getBorrower().getFullName();
 
+        text = loan.getText();
         sum = loan.getSum();
         deadline = loan.getDeadline();
         proofMediaUrl = loan.getProofMediaUrl();
